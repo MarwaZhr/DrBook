@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {ProductConsumer} from '../StoreData.js';
 import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
 
 const CartTotal = (props)=> {
   const cart = props.value.cart.data;
@@ -14,8 +15,8 @@ const CartTotal = (props)=> {
     tax = tax + 2;
   });
   total = tax + subtotal;
-  const handleToken = (token, addresses) => {
-    console.log(token, addresses);
+  const handleToken = (token, total) => {
+    axios.post('/checkout', {token, cart}).then((result)=> { console.log(result); });
   };
   return (
     <React.Fragment>

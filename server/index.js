@@ -3,9 +3,10 @@ const db = require('./db');
 const app = express();
 const port = 3000;
 const path = require ('path');
-// const stripe = require ('stripe')('sk_test_51J1vqqIjewuKal2UQMO2GnNXUHsOpis3y9RzdOsonFTpOaZ8KSR6Sfwysof7IqAMvd6xI1XdKgYOLI3ppoM9lqt300HHdrcyFP');
+const stripe = require ('stripe')('sk_test_51J1vqqIjewuKal2UQMO2GnNXUHsOpis3y9RzdOsonFTpOaZ8KSR6Sfwysof7IqAMvd6xI1XdKgYOLI3ppoM9lqt300HHdrcyFP');
+const uuid = require('uuid/v4');
 
-// app.use(cors())
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 //For rendring all the books in the store
@@ -46,30 +47,58 @@ app.get('/bookInfo:id', (req, res) => {
 });
 
 
-//for payment
-// app.post('/create-checkout-session', async (req, res) => {
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: ['card'],
-//     line_items: [
-//       {
-//         price_data: {
-//           currency: 'usd',
-//           product_data: {
-//             name: 'T-shirt',
-//           },
-//           unit_amount: 2000,
-//         },
-//         quantity: 1,
-//       },
-//     ],
-//     mode: 'payment',
-//     success_url: 'https://example.com/success',
-//     cancel_url: 'https://example.com/cancel',
-//   });
+//for payment : I copied the code from something like documentation and added something in it so it can work 
+app.post("/checkout", async (req, res) => {
+  console.log("Request:", req.body);
+  let totalPrice =  0;
+  let tax =2;
+  let name ="";
+  let error;
+  let status;
+  try {
+    const { cart, token } = req.body;
+    cart.map((item) =>{
+      totalPrice+= item.price + tax;
+      name += ", " + item.title;
+    })
+    console.log(totalPrice)
+    const customer = await stripe.customers.create({
+      email: token.email,
+      source: token.id
+    });
 
-//   res.json({ id: session.id });
-// });
+    const idempotency_key = uuid();
+    const charge = await stripe.charges.create(
+      {
+        amount: totalPrice* 100,
+        currency: "usd",
+        customer: customer.id,
+        receipt_email: token.email,
+        description: `Purchased : ${name}`,
+        shipping: {
+          name: token.card.name,
+          address: {
+            line1: token.card.address_line1,
+            line2: token.card.address_line2,
+            city: token.card.address_city,
+            country: token.card.address_country,
+            postal_code: token.card.address_zip
+          }
+        }
+      },
+      {
+        idempotency_key
+      }
+    );
+    console.log("Charge:", { charge });
+    status = "success";
+  } catch (error) {
+    console.error("Error:", error);
+    status = "failure";
+  }
 
+  res.json({ error, status });
+});
 
 
 
