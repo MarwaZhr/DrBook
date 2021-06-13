@@ -7,7 +7,8 @@
     "webpack": "webpack",
     "start:react-dev": "webpack -w",
     "start:server-dev": "nodemon server",
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "start:db": "node server/db/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "@babel/plugin-proposal-class-properties": "7.13.0",
     "@babel/preset-env": "7.14.4",
     "@babel/preset-react": "7.13.13",
+    "@types/react-router": "^5.1.15",
     "babel-loader": "8.2.2",
     "css-loader": "5.2.6",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
@@ -34,10 +36,15 @@
     "webpack-dev-server": "3.11.2"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bluebird": "^3.7.2",
+    "bootstrap": "^5.0.1",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.0"
   }
 }

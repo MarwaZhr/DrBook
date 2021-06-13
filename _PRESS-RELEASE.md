@@ -18,27 +18,32 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
-
+ Book Store
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+Any Book lover, they can buy books 
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+You can buy a book online
 
 ## Problem ##
   > Describe the problem your product solves.
-
+he can be updated about the new arraval and what's disponible in the stock, avoid wasting time
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+You only need to click on a button to see if your book is in the stock or not
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+TO ...  for a quote
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+Not easy
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
+write your own quote
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
