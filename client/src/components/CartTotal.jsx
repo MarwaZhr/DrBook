@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {ProductConsumer} from '../StoreData.js';
+import StripeCheckout from 'react-stripe-checkout';
 
 const CartTotal = (props)=> {
   const cart = props.value.cart.data;
@@ -13,6 +14,9 @@ const CartTotal = (props)=> {
     tax = tax + 2;
   });
   total = tax + subtotal;
+  const handleToken = (token, addresses) => {
+    console.log(token, addresses);
+  };
   return (
     <React.Fragment>
       <div className="container">
@@ -47,6 +51,13 @@ const CartTotal = (props)=> {
                   ${total}
               </strong>
             </h5>
+            <StripeCheckout  
+              stripeKey="pk_test_51J1vqqIjewuKal2UtGf8AihJr4TaRDefxP9u3kuYOjmBBhMiJwO1g6x5JDPL8SOQqgwC7xE6Da5IN8XAKtt5NCmE00U7DLx2v2" 
+              token={handleToken}
+              billingAddress
+              shippingAddress
+              amount={total * 100} 
+            />
           </div>
         </div>      
       </div>

@@ -3,7 +3,9 @@ const db = require('./db');
 const app = express();
 const port = 3000;
 const path = require ('path');
+// const stripe = require ('stripe')('sk_test_51J1vqqIjewuKal2UQMO2GnNXUHsOpis3y9RzdOsonFTpOaZ8KSR6Sfwysof7IqAMvd6xI1XdKgYOLI3ppoM9lqt300HHdrcyFP');
 
+// app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 //For rendring all the books in the store
@@ -42,6 +44,37 @@ app.get('/bookInfo:id', (req, res) => {
     res.status(200).json(result);
   });
 });
+
+
+//for payment
+// app.post('/create-checkout-session', async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     payment_method_types: ['card'],
+//     line_items: [
+//       {
+//         price_data: {
+//           currency: 'usd',
+//           product_data: {
+//             name: 'T-shirt',
+//           },
+//           unit_amount: 2000,
+//         },
+//         quantity: 1,
+//       },
+//     ],
+//     mode: 'payment',
+//     success_url: 'https://example.com/success',
+//     cancel_url: 'https://example.com/cancel',
+//   });
+
+//   res.json({ id: session.id });
+// });
+
+
+
+
+
+
 
 
 app.get('*', (req, res) => { 
