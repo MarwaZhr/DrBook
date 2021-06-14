@@ -52,13 +52,17 @@ const CartTotal = (props)=> {
                   ${total}
               </strong>
             </h5>
-            <StripeCheckout  
-              stripeKey="pk_test_51J1vqqIjewuKal2UtGf8AihJr4TaRDefxP9u3kuYOjmBBhMiJwO1g6x5JDPL8SOQqgwC7xE6Da5IN8XAKtt5NCmE00U7DLx2v2" 
-              token={handleToken}
-              billingAddress
-              shippingAddress
-              amount={total * 100} 
-            />
+            <Link to ="/payment">
+              <div onClick={()=>clearCart(cart)}>
+                <StripeCheckout 
+                  stripeKey="pk_test_51J1vqqIjewuKal2UtGf8AihJr4TaRDefxP9u3kuYOjmBBhMiJwO1g6x5JDPL8SOQqgwC7xE6Da5IN8XAKtt5NCmE00U7DLx2v2" 
+                  token={handleToken}
+                  billingAddress
+                  shippingAddress
+                  amount={total * 100} 
+                />
+              </div>
+            </Link>
           </div>
         </div>      
       </div>

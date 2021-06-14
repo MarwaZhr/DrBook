@@ -19,7 +19,7 @@ const NaveBare = () => {
         </li>
       </ul>
       <Link to='/cart' className="ml-auto" >
-        <ButtonContainer>
+        <ButtonContainer >
           <span className="mr-2"> 
             <i className="fas fa-cart-arrow-down fa-2x"></i>
           </span> 

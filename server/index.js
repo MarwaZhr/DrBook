@@ -100,7 +100,17 @@ app.post("/checkout", async (req, res) => {
   res.json({ error, status });
 });
 
+//Post in the Admin Side
+app.post('/AdminSide', (req, res) => {
+  let body = req.body.book;
+  let sql = 'INSERT INTO bookListe (title, author, image, description, price, quantitie,inCart,purchase, total, genre) values (?,?,?,?,?,?,?,?,?,?)';
+      let value = [body.title, body.author, body.image, body.description, body.price, body.quantitie, false, 0, 0, body.genre];
+      db.query(sql, value, (err, result) => {
+        if (err) { console.log(err); }
+        { console.log('added'); }
+      });
 
+})
 
 
 
